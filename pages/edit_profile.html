@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chef Assist - Edit My profile</title>
+    <link rel="stylesheet" href="../fonts/font-stylesheet.css">
+    <link rel="shortcut icon" href="../icons/website-icon.svg" type="image/x-icon">
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/edit_profile_style.css">
+</head>
+<body>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="navbar">
+                    <a href="./home.html" class="logo-home-link"><img src="../img/color-logo.svg" alt="Chef Assist" class="logo-home-link-img"></a>
+                    <div class="profile-menu-container">
+                        <a href="./menu.html" class="menu-link"><img src="../icons/menu-icon.svg" alt="Menu" class="menu-link"></a>
+                    </div>
+                </div>
+
+                <div class="arrow-back-container">
+                    <a href="./home.html" class="link-arrow-back"><img src="../icons/arrow-back-icon.svg" class="arrow-back-icon" alt="Back"></a>
+                    <p class="page-name">Edit My profile</p>
+                </div>
+
+
+
+                <div class="profile-container">
+                    <form action="./profile.html" class="edit-profile-form">
+                         
+                        <div class="user-pic-col">
+                            <div class="profile-cover-image-div">
+                                <img id="profile-cover-image-preview" class="profile-cover-image-preview">
+                                <input type="file" name="user_cover_photo" class="custom-file-input" id="userCoverPhoto" accept="image/*" onchange="previewImageCover(event)">
+                                <label for="userCoverPhoto" class="custom-file-label profile-cover-change-btn"><div class="change-profile-pic-btn-icon"></div></label>
+                            </div>
+                        </div>
+
+                        <div class="main-elements-inputs-container">
+
+                            <div class="input-container">
+                                <label class="input-label">Name</label>
+                                <input required type="text" placeholder="Your name" class="input-style">
+                            </div>
+
+                            <div class="input-container">
+                                <label class="input-label">Surame</label>
+                                <input required type="text" placeholder="Your surname" class="input-style">
+                            </div>
+
+                            <div class="input-container">
+                                <label class="input-label">Email</label>
+                                <input required type="email" placeholder="example@mail.com" class="input-style">
+                            </div>
+
+                            <div class="input-container">
+                                <label class="input-label">Telephone Number</label>
+                                <input required type="text" placeholder="0123445" class="input-style">
+                            </div>
+
+                            <div class="input-container">
+                                <label class="input-label">Level of Cooking</label>
+                                <select class="input-style">
+                                    <option value="beginner">Beginner</option>
+                                    <option value="average">Average</option>
+                                    <option value="professional">Professional</option>
+                                </select>
+                            </div>
+
+                            <div class="input-container">
+                                <div class="label-icon-container"><label class="input-label">Allergic Ingredients</label><img src="../icons/allergic-ingredients-icon.svg" alt="Icon" class="label-icons"></div>
+                                <textarea class="textarea-style" placeholder="Peanuts"></textarea>
+                            </div>
+
+                            <div class="input-container">
+                                <div class="label-icon-container"><label class="input-label">Diet Limits</label><img src="../icons/diet-llimits-icon.svg" alt="Icon" class="label-icons"></div>
+                                <textarea class="textarea-style" placeholder="Peanuts"></textarea>
+                            </div>
+
+                            <div class="input-container">
+                                <label class="input-label">Maximal calories per dish - kcal</label>
+                                <input type="number" placeholder="1233" min="0" class="input-style">
+                            </div>
+
+                            <div class="input-container">
+                                <label class="input-label">Maximal fats per dish - g</label>
+                                <input type="number" placeholder="300"  min="0" class="input-style">
+                            </div>
+
+                            <div class="input-container">
+                                <label class="input-label">Maximal proteins per dish - g</label>
+                                <input type="number" placeholder="30" min="0" class="input-style">
+                            </div>
+
+                            <div class="input-container">
+                                <label class="input-label">Maximal carbohydrates per dish - g</label>
+                                <input type="number" placeholder="30" min="0" class="input-style">
+                            </div>
+
+                        </div>
+
+                        <button type="submit" class="save-the-changes-btn"><img src="../icons/save-the-changes-icon.svg" class="save-the-changes-icon" alt="Icon"><p class="save-the-changes-text">Save the changes</p></button>
+
+                    </form>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+
+    <script src="../js/bootstrap.bundle.min.js"></script>
+    <script src="../js/edit_profile_script.js"></script>
+</body>
+</html>

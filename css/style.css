@@ -10,7 +10,7 @@ body::-webkit-scrollbar-track{
     background-color: rgba(0, 0, 0, 0);
 }
 
-p, a, input, button, select, option{
+p, a, input, button, select, option, textarea{
     font-family: 'Inter', 'Arial', sans-serif;
 }
 
