@@ -1,0 +1,232 @@
+@media (min-width: 100px) {
+
+    .navbar{
+        width: 100%;
+        position: relative;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+
+    }
+    
+    .logo-home-link-img{
+        position: relative;
+        margin: 10px;
+        width: 168px;
+        height: auto;
+        transition: all 0.2s ease;
+    }
+
+    .profile-menu-container{
+        position: relative;
+        margin-left: auto;
+        margin-right: 12px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 22px;
+
+    }
+
+    .profile-pic{
+        width: 52px;
+        height: auto;
+        transition: all 0.2s ease;
+    }
+
+    .menu-link{
+        width: 30px;
+        height: auto;
+        transition: all 0.2s ease;
+    }
+
+    .menu-link:hover, .profile-pic:hover, .logo-home-link-img:hover{
+        filter: brightness(110%);
+    }
+    .menu-link:active, .profile-pic:active, .logo-home-link-img:active{
+        filter: brightness(90%);
+    }
+
+    
+    .arrow-back-container{
+        position: relative;
+        margin-left: 10px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 16px;
+        transition: all 0.2s ease;
+    }
+
+    .arrow-back-icon{
+        transition: all 0.2s ease;
+    }
+
+    .page-name{
+        position: relative;
+        color: #5C0002;
+        font-size: 22px;
+        font-weight: 700;
+        margin-bottom: 0px;
+        transition: all 0.2s ease;
+        cursor: pointer;
+    }
+
+    .arrow-back-container:hover{
+        filter:brightness(110%);
+    }
+
+    .arrow-back-container:active{
+        filter: brightness(90%);
+    }
+
+    .recipe-cover-container{
+        position: relative;
+        display: flex;
+        margin: 0 auto;
+        margin-top: 22px;
+        width: 100%;
+        padding: 10px;
+        border-radius: 20px;
+        background-image: url(../img/background-red-elements.svg);
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center center;
+        background-attachment: fixed;
+    }
+
+    .recipe-page-container{
+        position: relative;
+        display: flex;
+        margin: 0 auto;
+        width: 100%;
+        padding: 12px 24px 100px 24px;
+        border-radius: 20px;
+        background: #FFDDDD;
+    }
+
+    .main-info-container{
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        margin: 0 auto;
+        justify-content: center;
+    }
+
+    .main-info-name-cooking-time-container{
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        margin: 0 auto;
+        justify-content: center;
+        gap: 4px;
+    }
+
+    .name-of-dish{
+        color: #5C0002;
+        font-size: 18px;
+        font-weight: 700;
+        margin-bottom: 0px;
+        text-align: center;
+    }
+
+    .cooking-time-container{
+        position: relative;
+        display: flex;
+        flex-direction: row;
+        margin: 0 auto;
+        align-items: center;
+        gap: 4px;
+    }
+
+    .cooking-time-container p{
+        color: #5C0002;
+        font-size: 14px;
+        font-weight: 500;
+        margin-bottom: 0px;
+        text-align: center;
+    }
+
+    .level-of-cooking-container{
+        position: relative;
+        display: flex;
+        flex-direction: row;
+        margin: 0 auto;
+        align-items: center;
+        gap: 4px;
+    }
+
+    .level-of-cooking-container p{
+        color: #5C0002;
+        font-size: 14px;
+        font-weight: 500;
+        margin-bottom: 0px;
+        text-align: center;
+    }
+
+    .dish-photo{
+        position: relative;
+        width: 100%;
+        height: 220px;
+        border-radius: 6px;
+        margin-top: 10px;
+    }
+
+    .short-desciption-btn-like-container{
+        position: relative;
+        margin-top: 18px;
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+    }
+
+    .short-description{
+        position: relative;
+        width: 225px;
+        color: #5C0002;
+        font-size: 13px;
+        font-weight: 400;
+        margin-bottom: 0px;
+    }
+
+    .like-btn{
+        position: relative;
+        display: flex;
+        margin-left: auto;
+        justify-content: center;
+        align-items: center;
+        border: 0px solid transparent;
+        width: 50px;
+        height: 47px;
+        background: transparent;
+        background-image: url(../icons/favourite-recipies-icon-not-active-on-recipies-page.svg);
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+
+
+
+
+
+}
+
+@media (min-width: 576px){
+
+}
+
+@media (min-width: 768px){
+
+}
+
+@media (min-width: 992px) {
+
+    .navbar{
+        width: 100%;
+        position: relative;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+
+    }
+
+}
