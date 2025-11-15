@@ -1,3 +1,24 @@
+<?php
+session_start();
+
+if (!isset($_SESSION['user_id'])) {
+    header("Location: login.php");
+    exit;
+}
+
+require_once '../config.php';
+
+$name = $_SESSION['name'];
+$user_id = $_SESSION['user_id'];
+$user_photo = $_SESSION['user_photo'] ?? 'img/user-no-profile-pic-photo.svg';
+
+
+$conn->close();
+
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,8 +39,8 @@
                 <div class="navbar">
                     <a href="#" class="logo-home-link"><img src="../img/color-logo.svg" alt="Chef Assist" class="logo-home-link-img"></a>
                     <div class="profile-menu-container">
-                        <a href="./profile.html" class="profile-pic-link"><img src="../img/profile-pic-default.svg" alt="Profile" class="profile-pic"></a>
-                        <a href="./menu.html" class="menu-link"><img src="../icons/menu-icon.svg" alt="Menu" class="menu-link"></a>
+                        <a href="./profile.php" class="profile-pic-link"><img src="../<?php echo htmlspecialchars($user_photo); ?>" style="border-radius: 50%;" alt="Profile" class="profile-pic"></a>
+                        <a href="./menu.php" class="menu-link"><img src="../icons/menu-icon.svg" alt="Menu" class="menu-link"></a>
                     </div>
                 </div>
 
@@ -27,7 +48,7 @@
                     <div class="greeting-container">
                         <div class="hello-text-container">
                             <p class="hello-text">Hello, </p>
-                            <p class="user-name">Parnak</p>
+                            <p class="user-name"><?php echo htmlspecialchars($name); ?></p>
                             <p class="hello-text">!</p>
                         </div>
                         <p class="question-text">What would you like to cook today?</p>

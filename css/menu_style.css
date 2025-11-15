@@ -172,6 +172,7 @@
         background-size: cover;
         background-position: center center;
         background-attachment: fixed;
+        border: 0px solid transparent;
         border-radius: 8px;
         padding: 14px 50px;
         position: relative;
