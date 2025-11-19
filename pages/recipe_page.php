@@ -1,9 +1,43 @@
+<?php
+session_start();
+
+if (!isset($_SESSION['user_id'])) {
+    header("Location: login.php");
+    exit;
+}
+
+require_once '../config.php';
+
+$user_id = $_SESSION['user_id'];
+$user_photo = $_SESSION['user_photo'] ?? 'img/user-no-profile-pic-photo.svg';
+
+$dish_id = isset($_GET['dish_id']) ? (int)$_GET['dish_id'] : 0;
+
+$dish = null;
+
+if ($dish_id > 0) {
+    $stmt = $conn->prepare("SELECT * FROM Dish WHERE dish_id = ?");
+    $stmt->bind_param("i", $dish_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $dish = $result->fetch_assoc();
+    $stmt->close();
+}
+
+$conn->close();
+
+if (!$dish) {
+    die("Dish not found");
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chef Assist - Dish Name</title>
+    <title>Chef Assist - <?php echo htmlspecialchars($dish['name_of_dish']); ?></title>
     <link rel="stylesheet" href="../fonts/font-stylesheet.css">
     <link rel="shortcut icon" href="../icons/website-icon.svg" type="image/x-icon">
     <link rel="stylesheet" href="../css/bootstrap.min.css">
@@ -17,16 +51,16 @@
             <div class="col-12">
 
                 <div class="navbar">
-                    <a href="./home.html" class="logo-home-link"><img src="../img/color-logo.svg" alt="Chef Assist" class="logo-home-link-img"></a>
+                    <a href="./home.php" class="logo-home-link"><img src="../img/color-logo.svg" alt="Chef Assist" class="logo-home-link-img"></a>
                     <div class="profile-menu-container">
-                        <a href="./profile.html" class="profile-pic-link"><img src="../img/profile-pic-default.svg" alt="Profile" class="profile-pic"></a>
-                        <a href="./menu.html" class="menu-link"><img src="../icons/menu-icon.svg" alt="Menu" class="menu-link"></a>
+                        <a href="./profile.php" class="profile-pic-link"><img  src="../<?php echo htmlspecialchars($user_photo); ?>" style="border-radius: 50%;" alt="Profile" class="profile-pic"></a>
+                        <a href="./menu.php" class="menu-link"><img src="../icons/menu-icon.svg" alt="Menu" class="menu-link"></a>
                     </div>
                 </div>
 
                 <div class="arrow-back-container">
-                    <a href="./home.html" class="link-arrow-back"><img src="../icons/arrow-back-icon.svg" class="arrow-back-icon" alt="Back"></a>
-                    <p class="page-name">Recipe French Fries</p>
+                    <a href="./home.php" class="link-arrow-back"><img src="../icons/arrow-back-icon.svg" class="arrow-back-icon" alt="Back"></a>
+                    <p class="page-name">Recipe <?php echo htmlspecialchars($dish['name_of_dish']); ?></p>
                 </div>
 
                 <div class="recipe-cover-container">
@@ -35,26 +69,26 @@
                         <div class="main-info-container">
 
                             <div class="main-info-name-cooking-time-container">
-                                <p class="name-of-dish">French fries</p>
+                                <p class="name-of-dish"><?php echo htmlspecialchars($dish['name_of_dish']); ?></p>
 
                                 <div class="cooking-time-container">
                                     <img src="../icons/cooking-time-icon-recipie-page.svg" alt="icon" class="cooking-time-icon">
                                     <p>Cooking time:</p>
-                                    <p>15</p>
+                                    <p><?php echo htmlspecialchars($dish['cooking_time']); ?></p>
                                     <p>min</p>
                                 </div>
 
                                 <div class="level-of-cooking-container">
                                     <p>Level:</p>
-                                    <p>Beginner</p>
+                                    <p><?php echo htmlspecialchars($dish['level_of_cooking']); ?></p>
                                 </div>
 
                             </div>
 
-                            <img src="../img/recipe-img/7.PNG" alt="Dish Photo" class="dish-photo">
+                            <img src="../<?php echo htmlspecialchars($dish['dish_image']); ?>" alt="Dish Photo" class="dish-photo">
 
                             <div class="short-desciption-btn-like-container">
-                                <p class="short-description">It’s very easy-cooking french fries for beginners. French fries will be crispy and tasty even after re-heating</p>
+                                <p class="short-description"><?php echo htmlspecialchars($dish['short_description']); ?></p>
                                 <button class="like-btn"></button>
                             </div>
 
@@ -103,22 +137,22 @@
                                 <ul class="dish-info-list">
                                     <li>
                                         <p>Calories:</p>
-                                        <p>1344</p>
+                                        <p><?php echo htmlspecialchars($dish['calories']); ?></p>
                                         <p>kcal</p>
                                     </li>
                                     <li>
                                         <p>Proteins:</p>
-                                        <p>30</p>
+                                        <p><?php echo htmlspecialchars($dish['proteins']); ?></p>
                                         <p>g</p>
                                     </li>
                                     <li>
                                         <p>Fats:</p>
-                                        <p>54</p>
+                                        <p><?php echo htmlspecialchars($dish['fats']); ?></p>
                                         <p>g</p>
                                     </li>
                                     <li>
                                         <p>Carbohydrates:</p>
-                                        <p>30</p>
+                                        <p><?php echo htmlspecialchars($dish['carbohydrates']); ?></p>
                                         <p>g</p>
                                     </li>
                                 </ul>

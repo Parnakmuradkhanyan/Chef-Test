@@ -22,6 +22,16 @@ $user_photo = $_SESSION['user_photo'] ?? 'img/user-no-profile-pic-photo.svg';
 
 $user_id = $_SESSION['user_id'];
 
+
+$allergic_ingredients = $_SESSION['allergic_ingredients'] ?? '';
+$ingredients_array = array_map('trim', explode(',', $allergic_ingredients));
+
+$diet_limit_ingredients = $_SESSION['diet_limit_ingredients'] ?? '';
+$diet_ingredients_array = array_map('trim', explode(',', $diet_limit_ingredients));
+
+
+
+
 $conn->close();
 
 ?>
@@ -82,11 +92,13 @@ $conn->close();
                                     <p class="no-text">No</p>
                                 </div>
                                 <ul class="not-allowed-food-list">
-                                    <li class="not-allowed-food-list-item">Peanuts</li>
-                                    <li class="not-allowed-food-list-item">Milk</li>
-                                    <li class="not-allowed-food-list-item">Fish</li>
-                                    <li class="not-allowed-food-list-item">Tomatoes</li>
-                                    <li class="not-allowed-food-list-item">Bananas</li>
+                                    <?php foreach ($ingredients_array as $ingredient): ?>
+                                        <?php if (!empty($ingredient)): ?>
+                                            <li class="not-allowed-food-list-item">
+                                                <?php echo htmlspecialchars($ingredient); ?>
+                                            </li>
+                                        <?php endif; ?>
+                                    <?php endforeach; ?>
                                 </ul>
                                 
                             </div>
@@ -105,11 +117,13 @@ $conn->close();
                                     <p class="no-text">No</p>
                                 </div>
                                 <ul class="not-allowed-food-list">
-                                    <li class="not-allowed-food-list-item">Peanuts</li>
-                                    <li class="not-allowed-food-list-item">Milk</li>
-                                    <li class="not-allowed-food-list-item">Fish</li>
-                                    <li class="not-allowed-food-list-item">Tomatoes</li>
-                                    <li class="not-allowed-food-list-item">Bananas</li>
+                                    <?php foreach ($diet_ingredients_array as $diet_ingredient): ?>
+                                        <?php if (!empty($diet_ingredient)): ?>
+                                            <li class="not-allowed-food-list-item">
+                                                <?php echo htmlspecialchars($diet_ingredient); ?>
+                                            </li>
+                                        <?php endif; ?>
+                                    <?php endforeach; ?>
                                 </ul>
                                 
                             </div>

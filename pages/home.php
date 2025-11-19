@@ -76,7 +76,7 @@ $conn->close();
                             <p class="button-text">Favourite recipies</p>
                         </div>
                     </a>
-                    <a href="./recipe_page.html" class="action-button-link">
+                    <a href="./recipe_page.php" class="action-button-link">
                         <div class="action-button-container-text">
                             <div class="action-button-container">
                                 <img class="icon-action-button" src="../icons/lets-try-something-new-icon-home.svg" />
