@@ -14,6 +14,9 @@ $user_photo = $_SESSION['user_photo'] ?? 'img/user-no-profile-pic-photo.svg';
 $dish_id = isset($_GET['dish_id']) ? (int)$_GET['dish_id'] : 0;
 
 $dish = null;
+$ingredients = [];
+$steps = [];
+$tutorial_link = null;
 
 if ($dish_id > 0) {
     $stmt = $conn->prepare("SELECT * FROM Dish WHERE dish_id = ?");
@@ -22,6 +25,48 @@ if ($dish_id > 0) {
     $result = $stmt->get_result();
     $dish = $result->fetch_assoc();
     $stmt->close();
+
+    $stmt = $conn->prepare("
+        SELECT i.name_of_ingredient, di.quantity
+        FROM Dishes_Ingredients di
+        JOIN Ingredients i ON di.ingredient_id = i.ingredient_id
+        WHERE di.dish_id = ?
+    ");
+    $stmt->bind_param("i", $dish_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    while ($row = $result->fetch_assoc()) {
+        $ingredients[] = $row;
+    }
+    $stmt->close();
+
+    $stmt = $conn->prepare("
+        SELECT step_number, text_of_step, img_of_step
+        FROM Dishes_Steps
+        WHERE dish_id = ?
+        ORDER BY step_number ASC
+    ");
+    $stmt->bind_param("i", $dish_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    while ($row = $result->fetch_assoc()) {
+        $steps[] = $row;
+    }
+    $stmt->close();
+
+    $stmt = $conn->prepare("
+        SELECT tutorial_href 
+        FROM Dishes_TutorialLinks 
+        WHERE dish_id = ?
+    ");
+    $stmt->bind_param("i", $dish_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    if ($row = $result->fetch_assoc()) {
+        $tutorial_link = $row['tutorial_href'];
+    }
+    $stmt->close();
+
 }
 
 $conn->close();
@@ -29,8 +74,8 @@ $conn->close();
 if (!$dish) {
     die("Dish not found");
 }
-
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -99,36 +144,14 @@ if (!$dish) {
                             <div class="ingredients-container">
                                 <p class="ingredients-text">Ingredients:</p>
                                 <ul class="ingredients-list">
-                                    <li>
-                                        <p class="ingredient-text">2 ½ pounds russet potatoes, peeled</p>
-                                    </li>
-                                    <li>
-                                        <p class="ingredient-text">1 cup vegetable oil for frying</p>
-                                    </li>
-                                    <li>
-                                        <p class="ingredient-text">1 cup vegetable oil for frying</p>
-                                    </li>
-                                    <li>
-                                        <p class="ingredient-text">1 cup all-purpose flour</p>
-                                    </li>
-                                    <li>
-                                        <p class="ingredient-text">1 teaspoon garlic salt</p>
-                                    </li>
-                                    <li>
-                                        <p class="ingredient-text">1 teaspoon garlic salt</p>
-                                    </li>
-                                    <li>
-                                        <p class="ingredient-text">1 teaspoon onion salt</p>
-                                    </li>
-                                    <li>
-                                        <p class="ingredient-text">1 teaspoon paprika</p>
-                                    </li>
-                                    <li>
-                                        <p class="ingredient-text">1 teaspoon salt</p>
-                                    </li>
-                                    <li>
-                                        <p class="ingredient-text">½ cup water, or as needed</p>
-                                    </li>
+                                    <?php foreach ($ingredients as $ingredient): ?>
+                                        <li>
+                                            <p class="ingredient-text">
+                                                <?php echo htmlspecialchars($ingredient['quantity']); ?>
+                                                <?php echo htmlspecialchars($ingredient['name_of_ingredient']); ?>
+                                            </p>
+                                        </li>
+                                    <?php endforeach; ?>
                                 </ul>
                             </div>
 
@@ -164,23 +187,27 @@ if (!$dish) {
                         <p class="how-to-cook-text">How to cook:</p>
 
                         <div class="steps-of-cooking-container">
+                            <?php foreach ($steps as $step): ?>
+                                <div class="step-container">
+                                    <div class="step-num-name">
+                                        <p class="step-text">Step</p>
+                                        <p class="step-num"><?php echo htmlspecialchars($step['step_number']); ?></p>
+                                    </div>
 
-                            <div class="step-container">
-                                <div class="step-num-name">
-                                    <p class="step-text">Step</p>
-                                    <p class="step-num">1</p>
+                                    <p class="step-description">
+                                        <?php echo htmlspecialchars($step['text_of_step']); ?>
+                                    </p>
+
+                                    <?php if (!empty($step['img_of_step'])): ?>
+                                        <img src="../<?php echo htmlspecialchars($step['img_of_step']); ?>" alt="image" class="step-image">
+                                    <?php endif; ?>
                                 </div>
-
-                                <p class="step-description">Slice potatoes into French fries and place them into a large bowl of cold water to prevent them from turning brown.</p>
-
-                                <img src="../img/recipe-img/1.PNG" alt="image" class="step-image">
-                            </div>
-                    
+                            <?php endforeach; ?>
                         </div>
 
                         <div class="video-instruction-container">
                             <p class="video-instruction-text">Video instruction:</p>
-                            <iframe class="video-instruction-frame" src="https://www.youtube.com/embed/CYhYSoJrOLg?si=F2h0gWJKaYrj1rI1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                            <iframe class="video-instruction-frame" src="<?php echo htmlspecialchars($tutorial_link); ?>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                         </div>
 
 

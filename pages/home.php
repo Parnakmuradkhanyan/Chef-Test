@@ -53,11 +53,14 @@ $conn->close();
                         </div>
                         <p class="question-text">What would you like to cook today?</p>
                     </div>
-                    <form action="./search_recipe_recomendation.html" class="searchbar-container">
+                     <form action="./search_recipe_recomendation.php" method="get" class="searchbar-container">
                         <input name="searchbar_food_input" placeholder="French fries" required class="searchbar-input" type="text">
-                        <button type="submit" class="search-btn"><img src="../icons/searchbar-search-icon.svg" alt="Search" class="search-btn-icon"></button>
+                        <button type="submit" class="search-btn">
+                            <img src="../icons/searchbar-search-icon.svg" alt="Search" class="search-btn-icon">
+                        </button>
                     </form>
                 </div>
+
 
                 <div class="action-buttons-container">
                     <a href="./cook_from_fridge.html" class="action-button-link">
@@ -76,7 +79,7 @@ $conn->close();
                             <p class="button-text">Favourite recipies</p>
                         </div>
                     </a>
-                    <a href="./recipe_page.php" class="action-button-link">
+                   <a href="./random_recipe.php" class="action-button-link">
                         <div class="action-button-container-text">
                             <div class="action-button-container">
                                 <img class="icon-action-button" src="../icons/lets-try-something-new-icon-home.svg" />
@@ -84,7 +87,8 @@ $conn->close();
                             <p class="button-text">Let's try something new</p>
                         </div>
                     </a>
-                    <a href="./traditional_dishes_choose_country.html" class="action-button-link">
+
+                    <a href="./traditional_dishes_choose_country.php" class="action-button-link">
                         <div class="action-button-container-text">
                             <div class="action-button-container">
                                 <img class="icon-action-button" src="../icons/traditional-dishes-icon-home.svg" />
