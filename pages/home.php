@@ -12,6 +12,20 @@ $name = $_SESSION['name'];
 $user_id = $_SESSION['user_id'];
 $user_photo = $_SESSION['user_photo'] ?? 'img/user-no-profile-pic-photo.svg';
 
+$stmt = $conn->prepare("
+    SELECT d.* 
+    FROM Users_RecentlyViewedDishes urvd
+    JOIN Dish d ON urvd.dish_id = d.dish_id
+    WHERE urvd.user_id = ?
+    ORDER BY urvd.viewed_at DESC
+    LIMIT 1
+");
+$stmt->bind_param("i", $user_id);
+$stmt->execute();
+$result = $stmt->get_result();
+$recent_dish = $result->fetch_assoc();
+$stmt->close();
+
 
 $conn->close();
 
@@ -63,7 +77,7 @@ $conn->close();
 
 
                 <div class="action-buttons-container">
-                    <a href="./cook_from_fridge.html" class="action-button-link">
+                    <a href="./cook_from_fridge.php" class="action-button-link">
                         <div class="action-button-container-text">
                             <div class="action-button-container">
                                 <img class="icon-action-button" src="../icons/cook-from-fridge-icon-home.svg" />
@@ -71,7 +85,7 @@ $conn->close();
                             <p class="button-text">Cook from fridge</p>
                         </div>
                     </a>
-                    <a href="./favourite_recipies.html" class="action-button-link">
+                    <a href="./favourite_recipies.php" class="action-button-link">
                         <div class="action-button-container-text">
                             <div class="action-button-container">
                                 <img class="icon-action-button" src="../icons/favourite-recipies-icon-home.svg" />
@@ -102,21 +116,19 @@ $conn->close();
         </div>
     </div>
 
-    <div class="recent-recipe-container">
-        <div class="top-element-decor"></div>
-
-        <p class="recent-dish-text">Recent dish</p>
-
-        <div class="photo-name-btn-container">
-            <img src="../img/dish-example-photo.svg" alt="Dish" class="recent-dish-image">
-
-            <div class="dish-name-view-btn-container">
-                <div class="dish-name">Spaghetti with vegetables</div>
-                <button class="view-btn" action="./recipe_page.html">View</button>
+    <?php if ($recent_dish): ?>
+        <div class="recent-recipe-container">
+            <div class="top-element-decor"></div>
+            <p class="recent-dish-text">Recent dish</p>
+            <div class="photo-name-btn-container">
+                <img src="../<?php echo htmlspecialchars($recent_dish['dish_image']); ?>" alt="Dish" class="recent-dish-image">
+                <div class="dish-name-view-btn-container">
+                    <div class="dish-name"><?php echo htmlspecialchars($recent_dish['name_of_dish']); ?></div>
+                    <a href="./recipe_page.php?dish_id=<?php echo $recent_dish['dish_id']; ?>" class="view-btn">View</a>
+                </div>
             </div>
         </div>
-
-    </div>
+    <?php endif; ?>
     
     <script src="./js/bootstrap.bundle.min.js"></script>
     

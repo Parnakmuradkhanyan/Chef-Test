@@ -67,6 +67,28 @@ if ($dish_id > 0) {
     }
     $stmt->close();
 
+   $is_favourite = false;
+
+    $stmt = $conn->prepare("SELECT 1 FROM Favourite_Dish WHERE user_id = ? AND dish_id = ?");
+    $stmt->bind_param("ii", $user_id, $dish_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    if ($result->num_rows > 0) {
+        $is_favourite = true;
+    }
+    $stmt->close();
+
+    $stmt = $conn->prepare("
+        INSERT INTO Users_RecentlyViewedDishes (user_id, dish_id, viewed_at)
+        VALUES (?, ?, NOW())
+        ON DUPLICATE KEY UPDATE viewed_at = NOW()
+    ");
+    $stmt->bind_param("ii", $user_id, $dish_id);
+    $stmt->execute();
+    $stmt->close();
+
+
+
 }
 
 $conn->close();
@@ -134,7 +156,13 @@ if (!$dish) {
 
                             <div class="short-desciption-btn-like-container">
                                 <p class="short-description"><?php echo htmlspecialchars($dish['short_description']); ?></p>
-                                <button class="like-btn"></button>
+                                <button class="like-btn <?php echo $is_favourite ? 'active' : ''; ?>" 
+                                        data-dish-id="<?php echo $dish_id; ?>"
+                                        style="background-image: url(../icons/<?php echo $is_favourite 
+                                            ? 'favourite-recipies-icon-active-on-recipies-page.svg' 
+                                            : 'favourite-recipies-icon-not-active-on-recipies-page.svg'; ?>)">
+                                </button>
+
                             </div>
 
                         </div>
@@ -221,5 +249,8 @@ if (!$dish) {
 
 
     <script src="../js/bootstrap.bundle.min.js"></script>
+    <script src="../js/recipe_page_script.js"></script>
+
+
 </body>
 </html>

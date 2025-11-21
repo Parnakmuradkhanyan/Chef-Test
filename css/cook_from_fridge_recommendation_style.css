@@ -22,7 +22,7 @@
 
     .profile-pic{
         width: 52px;
-        height: auto;
+        height: 52px;
         transition: all 0.2s ease;
     }
 
@@ -90,6 +90,17 @@
         margin: 0 auto;
         justify-content: center;
     }
+
+    .no-matching-recipies{
+        margin-top: 20px;
+        width: 100%;
+        position: relative;
+        color: #5C0002;
+        font-weight: 500;
+        font-size: 16px;
+        margin-left: 12px;
+    }
+
 
     .dish-recomended-img{
         position: relative;
@@ -315,6 +326,7 @@
     }
 
     .row-of-recipies{
+        width: 100%;
         margin-bottom: 350px;
     }
 

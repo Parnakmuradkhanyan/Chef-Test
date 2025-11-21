@@ -22,7 +22,7 @@
 
     .profile-pic{
         width: 52px;
-        height: auto;
+        height: 52px;
         transition: all 0.2s ease;
     }
 
@@ -90,6 +90,7 @@
         background-attachment: fixed;
         border-radius: 20px;
         padding: 20px;
+        padding-bottom: 60px;
         display: flex;
         flex-direction: row;
         align-items: center;
