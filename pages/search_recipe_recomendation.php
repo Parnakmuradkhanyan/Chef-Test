@@ -88,6 +88,20 @@ if (!empty($search_query)) {
         }
     }
 
+    
+    $stmt = $conn->prepare("
+        SELECT d.* 
+        FROM Users_RecentlyViewedDishes urvd
+        JOIN Dish d ON urvd.dish_id = d.dish_id
+        WHERE urvd.user_id = ?
+        ORDER BY urvd.viewed_at DESC
+        LIMIT 1
+    ");
+    $stmt->bind_param("i", $user_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $recent_dish = $result->fetch_assoc();
+
     $stmt->close();
 }
 
@@ -177,21 +191,19 @@ $conn->close();
     </div>
 
 
-    <div class="recent-recipe-container">
-        <div class="top-element-decor"></div>
-
-        <p class="recent-dish-text">Recent dish</p>
-
-        <div class="photo-name-btn-container">
-            <img src="../img/dish-example-photo.svg" alt="Dish" class="recent-dish-image">
-
-            <div class="dish-name-view-btn-container">
-                <div class="dish-name">Spaghetti with vegetables</div>
-                <button class="view-btn">View</button>
+    <?php if ($recent_dish): ?>
+        <div class="recent-recipe-container">
+            <div class="top-element-decor"></div>
+            <p class="recent-dish-text">Recent dish</p>
+            <div class="photo-name-btn-container">
+                <img src="../<?php echo htmlspecialchars($recent_dish['dish_image']); ?>" alt="Dish" class="recent-dish-image">
+                <div class="dish-name-view-btn-container">
+                    <div class="dish-name"><?php echo htmlspecialchars($recent_dish['name_of_dish']); ?></div>
+                    <a href="./recipe_page.php?dish_id=<?php echo $recent_dish['dish_id']; ?>" class="view-btn">View</a>
+                </div>
             </div>
         </div>
-
-    </div>
+    <?php endif; ?>
 
     <script src="../js/bootstrap.bundle.min.js"></script>
 </body>

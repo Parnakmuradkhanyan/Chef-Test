@@ -338,13 +338,17 @@
         font-size: 18px;
         font-weight: 700;
         transition: all 0.2s ease;
+        text-align: center;
+        text-decoration: none;
     }
 
     .view-btn:hover{
+        color: #B70004;
         filter: brightness(110%);
     }
 
     .view-btn:active{
+        color: #B70004;
         filter: brightness(90%);
     }
 

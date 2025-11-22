@@ -12,6 +12,9 @@ $name = $_SESSION['name'];
 $user_id = $_SESSION['user_id'];
 $user_photo = $_SESSION['user_photo'] ?? 'img/user-no-profile-pic-photo.svg';
 
+
+
+
 $stmt = $conn->prepare("
     SELECT d.* 
     FROM Users_RecentlyViewedDishes urvd
@@ -25,6 +28,13 @@ $stmt->execute();
 $result = $stmt->get_result();
 $recent_dish = $result->fetch_assoc();
 $stmt->close();
+
+
+
+
+
+
+
 
 
 $conn->close();
