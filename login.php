@@ -61,6 +61,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chef Assist - Login</title>
     <link rel="stylesheet" href="./fonts/font-stylesheet.css">
+    <link rel="manifest" href="./js/manifest.webmanifest">
+    <link rel="apple-touch-icon" href="./icons/website-icon.svg">
+    <link rel="apple-touch-icon" sizes="152x152" href="./icons/152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="./icons/180.png">
+    <link rel="apple-touch-icon" sizes="167x167" href="./icons/167.png">
     <link rel="shortcut icon" href="./icons/website-icon.svg" type="image/x-icon">
     <link rel="stylesheet" href="./css/bootstrap.min.css">
     <link rel="stylesheet" href="./css/style.css">

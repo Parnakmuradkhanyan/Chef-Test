@@ -1,0 +1,18 @@
+{
+    "background_color": "white",
+    "description": "Abcdefg",
+    "display": "fullscreen",
+    "start_url": "../login.php",
+
+
+    "icons":[
+        {
+            "src": "../icons/icon.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ],
+    "name": "Chef Assist",
+    "shortname": "Chef Assist"
+
+}

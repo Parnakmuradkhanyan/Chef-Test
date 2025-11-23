@@ -83,6 +83,7 @@
 
     .recomended-recipe-container{
         position: relative;
+        min-height: 305px;
         background-image: url(../img/background-red-elements.svg);
         background-repeat: no-repeat;
         background-size: cover;
@@ -187,6 +188,8 @@
 
     .short-description{
         position: relative;
+        max-height: 100px;
+        overflow: scroll;
         margin: 0 auto;
         display: flex;
         margin-top: 10px;
@@ -196,6 +199,20 @@
         font-weight: 400;
         margin-bottom: 0px;
     }
+
+    .short-description::-webkit-scrollbar{
+    width: 0px;
+    height: 0px;
+    background-color: transparent;
+    }
+    .short-description::-webkit-scrollbar-thumb{
+        background-color: rgba(0, 0, 0, 0);
+    }
+    .short-description::-webkit-scrollbar-track{
+        background-color: rgba(0, 0, 0, 0);
+    }
+
+
 
     .dish-info-list{
         position: relative;
