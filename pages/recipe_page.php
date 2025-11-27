@@ -19,6 +19,7 @@ $steps = [];
 $tutorial_link = null;
 
 if ($dish_id > 0) {
+
     $stmt = $conn->prepare("SELECT * FROM Dish WHERE dish_id = ?");
     $stmt->bind_param("i", $dish_id);
     $stmt->execute();
@@ -87,15 +88,14 @@ if ($dish_id > 0) {
     $stmt->execute();
     $stmt->close();
 
-
-
 }
 
 $conn->close();
 
 if (!$dish) {
-    die("Dish not found");
+    die("Dish not found!");
 }
+
 ?>
 
 

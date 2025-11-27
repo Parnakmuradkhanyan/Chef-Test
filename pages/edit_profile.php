@@ -8,7 +8,6 @@ if (!isset($_SESSION['user_id'])) {
 }
 
 $user_id = $_SESSION['user_id'];
-
 $name = $_SESSION['name'] ?? '';
 $surname = $_SESSION['surname'] ?? '';
 $email = $_SESSION['email'] ?? '';
@@ -96,6 +95,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         echo "<script>alert('Profile was successfully updated!'); window.location.href = '../pages/profile.php';</script>";
         exit();
+        
     } else {
         die("Request error: " . $stmt->error);
     }

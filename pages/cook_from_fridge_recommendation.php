@@ -8,7 +8,6 @@ if (!isset($_SESSION['user_id'])) {
 }
 
 $user_id = $_SESSION['user_id'];
-
 $user_photo = $_SESSION['user_photo'] ?? 'img/user-no-profile-pic-photo.svg';
 
 
@@ -17,18 +16,18 @@ $stmt->bind_param("i", $user_id);
 $stmt->execute();
 $user = $stmt->get_result()->fetch_assoc();
 
-    $stmt = $conn->prepare("
-        SELECT d.* 
-        FROM Users_RecentlyViewedDishes urvd
-        JOIN Dish d ON urvd.dish_id = d.dish_id
-        WHERE urvd.user_id = ?
-        ORDER BY urvd.viewed_at DESC
-        LIMIT 1
-    ");
-    $stmt->bind_param("i", $user_id);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    $recent_dish = $result->fetch_assoc();
+$stmt = $conn->prepare("
+    SELECT d.* 
+    FROM Users_RecentlyViewedDishes urvd
+    JOIN Dish d ON urvd.dish_id = d.dish_id
+    WHERE urvd.user_id = ?
+    ORDER BY urvd.viewed_at DESC
+    LIMIT 1
+");
+$stmt->bind_param("i", $user_id);
+$stmt->execute();
+$result = $stmt->get_result();
+$recent_dish = $result->fetch_assoc();
 
 
 $stmt->close();
@@ -75,6 +74,7 @@ if (!empty($ingredients_input)) {
         $result = $stmt->get_result();
 
         while ($dish = $result->fetch_assoc()) {
+
             $skip = false;
 
             if (($user['max_calories'] > 0 && $dish['calories'] > $user['max_calories']) ||
@@ -108,6 +108,7 @@ if (!empty($ingredients_input)) {
                 $dishes[] = $dish;
             }
         }
+        
         $stmt->close();
     }
 }

@@ -4,9 +4,11 @@ require_once '../config.php';
 
 $countries = [];
 $result = $conn->query("SELECT * FROM Countries ORDER BY name_of_country ASC");
+
 while ($row = $result->fetch_assoc()) {
     $countries[] = $row;
 }
+
 $conn->close();
 ?>
 

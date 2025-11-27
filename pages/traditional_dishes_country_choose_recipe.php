@@ -7,8 +7,8 @@ $user_photo = $_SESSION['user_photo'] ?? 'img/user-no-profile-pic-photo.svg';
 
 
 $country_id = isset($_GET['country_id']) ? (int)$_GET['country_id'] : 0;
-
 $country = null;
+
 $dishes = [];
 
 
@@ -27,6 +27,7 @@ if ($country_id > 0) {
         JOIN Dish d ON dc.dish_id = d.dish_id
         WHERE dc.country_id = ?
     ");
+
     $stmt->bind_param("i", $country_id);
     $stmt->execute();
     $result = $stmt->get_result();

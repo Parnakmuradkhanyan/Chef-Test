@@ -36,15 +36,17 @@ if (!empty($search_query)) {
         AND proteins <= ?
         AND carbohydrates <= ?
     ");
+
     $like = "%".$search_query."%";
     $stmt->bind_param("siiii", $like, $max_calories, $max_fats, $max_proteins, $max_carbohydrates);
     $stmt->execute();
     $result = $stmt->get_result();
 
     while ($dish = $result->fetch_assoc()) {
-        $dish_id = $dish['dish_id'];
 
+        $dish_id = $dish['dish_id'];
         $skip = false;
+
         if (!empty($allergic_array)) {
             $stmtIng = $conn->prepare("
                 SELECT i.name_of_ingredient 
@@ -86,8 +88,8 @@ if (!empty($search_query)) {
         if (!$skip) {
             $dishes[] = $dish;
         }
-    }
 
+    }
     
     $stmt = $conn->prepare("
         SELECT d.* 
@@ -97,6 +99,7 @@ if (!empty($search_query)) {
         ORDER BY urvd.viewed_at DESC
         LIMIT 1
     ");
+    
     $stmt->bind_param("i", $user_id);
     $stmt->execute();
     $result = $stmt->get_result();

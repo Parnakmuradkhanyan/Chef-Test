@@ -10,7 +10,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = $_POST['password'] ?? '';
     $confirm_password = $_POST['confirm_password'] ?? '';
 
-        // ✅ Перевірка на збіг паролів
         if ($password !== $confirm_password) {
             echo "<script>
                     alert('Passwords do not match. Please try again.');

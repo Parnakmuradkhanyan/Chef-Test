@@ -11,6 +11,7 @@ $user_id = $_SESSION['user_id'];
 $dish_id = isset($_POST['dish_id']) ? (int)$_POST['dish_id'] : 0;
 
 if ($dish_id > 0) {
+
     $stmt = $conn->prepare("SELECT 1 FROM Favourite_Dish WHERE user_id = ? AND dish_id = ?");
     $stmt->bind_param("ii", $user_id, $dish_id);
     $stmt->execute();
@@ -29,6 +30,9 @@ if ($dish_id > 0) {
         $stmtIns->close();
         echo json_encode(["status" => "added"]);
     }
+
     $stmt->close();
 }
+
 $conn->close();
+?>

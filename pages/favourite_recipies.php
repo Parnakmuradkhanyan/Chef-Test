@@ -15,25 +15,25 @@ $stmt = $conn->prepare("
 $stmt->bind_param("i", $user_id);
 $stmt->execute();
 $result = $stmt->get_result();
+
 while ($row = $result->fetch_assoc()) {
     $dishes[] = $row;
 }
 
+$stmt = $conn->prepare("
+    SELECT d.* 
+    FROM Users_RecentlyViewedDishes urvd
+    JOIN Dish d ON urvd.dish_id = d.dish_id
+    WHERE urvd.user_id = ?
+    ORDER BY urvd.viewed_at DESC
+    LIMIT 1
+");
+$stmt->bind_param("i", $user_id);
+$stmt->execute();
+$result = $stmt->get_result();
+$recent_dish = $result->fetch_assoc();
 
-    $stmt = $conn->prepare("
-        SELECT d.* 
-        FROM Users_RecentlyViewedDishes urvd
-        JOIN Dish d ON urvd.dish_id = d.dish_id
-        WHERE urvd.user_id = ?
-        ORDER BY urvd.viewed_at DESC
-        LIMIT 1
-    ");
-    $stmt->bind_param("i", $user_id);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    $recent_dish = $result->fetch_assoc();
-
-    $stmt->close();
+$stmt->close();
 
 $conn->close();
 ?>

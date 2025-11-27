@@ -11,6 +11,6 @@ if ($row) {
     header("Location: recipe_page.php?dish_id=" . $row['dish_id']);
     exit;
 } else {
-    die("No recipes found");
+    die("No recipes found!");
 }
 ?>

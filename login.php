@@ -11,6 +11,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt = $conn->prepare($sql);
 
     if ($stmt) {
+
         $stmt->bind_param("s", $email);
         $stmt->execute();
         $stmt->store_result();
@@ -41,6 +42,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             } else {
                 echo "<script>alert('Incorrect password!');</script>";
             }
+            
         } else {
             echo "<script>alert('User with this email was not found!');</script>";
         }
@@ -48,7 +50,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->close();
 
     } else {
-
         echo "<script>alert('Request Error: " . $conn->error . "');</script>";
     }
 }

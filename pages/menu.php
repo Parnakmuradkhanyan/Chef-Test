@@ -6,12 +6,9 @@ if (!isset($_SESSION['user_id'])) {
     exit;
 }
 
-
 $name = $_SESSION['name'] ?? 'Not written';
 $surname = $_SESSION['surname'] ?? 'Not written';
-
 $user_photo = $_SESSION['user_photo'] ?? 'img/user-no-profile-pic-photo.svg';
-
 ?>
 
 

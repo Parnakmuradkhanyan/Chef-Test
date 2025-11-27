@@ -9,11 +9,9 @@ if (!isset($_SESSION['user_id'])) {
 require_once '../config.php';
 
 $user_photo = $_SESSION['user_photo'] ?? 'img/user-no-profile-pic-photo.svg';
-
 $user_id = $_SESSION['user_id'];
 
 $conn->close();
-
 ?>
 
 

@@ -19,7 +19,6 @@ $max_proteins = $_SESSION['max_proteins'] ?? '0';
 $max_carbohydrates = $_SESSION['max_carbohydrates'] ?? '0';
 
 $user_photo = $_SESSION['user_photo'] ?? 'img/user-no-profile-pic-photo.svg';
-
 $user_id = $_SESSION['user_id'];
 
 
@@ -28,9 +27,6 @@ $ingredients_array = array_map('trim', explode(',', $allergic_ingredients));
 
 $diet_limit_ingredients = $_SESSION['diet_limit_ingredients'] ?? '';
 $diet_ingredients_array = array_map('trim', explode(',', $diet_limit_ingredients));
-
-
-
 
 $conn->close();
 
